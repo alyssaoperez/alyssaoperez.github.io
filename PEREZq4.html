@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Elmond Shop | Nut Lovers’ Paradise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      background: #fff8f2;
+      color: #4b2e2e;
+    }
+
+    header {
+      background-color: #d9b382;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .category {
+      background: #fef4e8;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 1100px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .category h2 {
+      border-bottom: 2px solid #d9b382;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #7b4f2c;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product {
+      background: #fff;
+      padding: 15px;
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .product h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #5e3d29;
+    }
+
+    .product p {
+      margin: 8px 0;
+    }
+
+    button {
+      background-color: #b98053;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8f5e3c;
+    }
+
+    #cart-section {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fcefe6;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    #cart {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart li {
+      background: #fff;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #e2c6ae;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #cart li button {
+      background: #e2725b;
+      font-size: 12px;
+      padding: 5px 8px;
+    }
+
+    form input, form button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #d2a679;
+    }
+
+    form button {
+      background-color: #b98053;
+      color: white;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  🥜 Elmond Shop – Nut Lovers’ Paradise
+</header>
+
+
+<div class="category">
+  <h2>Almonds</h2>
+  <div class="products">
+    <div class="product"><h3>Raw Almonds</h3><p>₱150</p><button onclick="addToCart('Raw Almonds', 150)">Add to cart</button></div>
+    <div class="product"><h3>Roasted Almonds</h3><p>₱180</p><button onclick="addToCart('Roasted Almonds', 180)">Add to cart</button></div>
+    <div class="product"><h3>Honey Almonds</h3><p>₱200</p><button onclick="addToCart('Honey Almonds', 200)">Add to cart</button></div>
+    <div class="product"><h3>Spicy Almonds</h3><p>₱190</p><button onclick="addToCart('Spicy Almonds', 190)">Add to cart</button></div>
+    <div class="product"><h3>Almond Butter</h3><p>₱250</p><button onclick="addToCart('Almond Butter', 250)">Add to cart</button></div>
+  </div>
+</div>
+
+<div class="category">
+  <h2>Cashews</h2>
+  <div class="products">
+    <div class="product"><h3>Raw Cashews</h3><p>₱170</p><button onclick="addToCart('Raw Cashews', 170)">Add to cart</button></div>
+    <div class="product"><h3>Salted Cashews</h3><p>₱190</p><button onclick="addToCart('Salted Cashews', 190)">Add to cart</button></div>
+    <div class="product"><h3>Caramel Cashews</h3><p>₱210</p><button onclick="addToCart('Caramel Cashews', 210)">Add to cart</button></div>
+    <div class="product"><h3>Spiced Cashews</h3><p>₱195</p><button onclick="addToCart('Spiced Cashews', 195)">Add to cart</button></div>
+    <div class="product"><h3>Cashew Butter</h3><p>₱260</p><button onclick="addToCart('Cashew Butter', 260)">Add to cart</button></div>
+  </div>
+</div>
+
+
+<section id="cart-section">
+  <h2>Your Cart</h2>
+  <ul id="cart"></ul>
+  <p><strong>Total: ₱<span id="total">0</span></strong></p>
+
+  
+  <form method="POST" action="http://47.129.9.35/cs3/checkout.php" id="checkoutForm">
+    <input type="text" name="cust_name" placeholder="Full Name" required>
+    <input type="text" name="cust_addr" placeholder="Delivery Address" required>
+    <input type="email" name="cust_email" placeholder="Email Address" required>
+    <input type="hidden" name="cust_order" id="cust_order">
+    <button type="submit">Checkout</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Elmond Shop. Designed with love for nut lovers.
+</footer>
+
+<script>
+  let cartItems = [];
+
+  
+  function addToCart(name, price) {
+    cartItems.push({ prod_name: name, prod_price: price });
+    updateCart();
+  }
+
+  
+  function removeItem(index) {
+    cartItems.splice(index, 1);
+    updateCart();
+  }
+
+  
+  function updateCart() {
+  const cart = document.getElementById("cart");
+  const totalDisplay = document.getElementById("total");
+  const orderField = document.getElementById("cust_order");
+  cart.innerHTML = '';
+  let total = 0;
+
+  cartItems.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `${item.prod_name} - ₱${item.prod_price} <button onclick="removeItem(${index})">Remove</button>`;
+    cart.appendChild(li);
+    total += item.prod_price;
+  });
+
+  totalDisplay.textContent = total;
+  orderField.value = JSON.stringify(cartItems);  
+}
+
+
+  
+  document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty! Please add items before proceeding to checkout.");
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>
